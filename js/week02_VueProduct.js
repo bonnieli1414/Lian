@@ -4,7 +4,7 @@ createApp({
   data() {
     return {
       apiUrl: 'https://vue3-course-api.hexschool.io/v2',
-      apiPath: 'hexschoolvue',
+      apiPath: 'bonnieli1414',
       products: [],
       tempProduct: {},
     }
@@ -43,4 +43,3 @@ createApp({
     this.checkAdmin()
   }
 }).mount('#app');
-
