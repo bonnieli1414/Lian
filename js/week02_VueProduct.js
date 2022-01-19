@@ -21,6 +21,16 @@ createApp({
           window.location = 'index.html';
         })
     },
+    upToData() {
+      const url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
+      axios.post(url)
+        .then(() => {
+         
+        })
+        .catch((err) => {
+          alert(err.data.message);  
+        })
+    },
     getData() {
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/products`;
       axios.get(url)

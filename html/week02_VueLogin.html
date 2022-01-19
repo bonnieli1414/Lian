@@ -17,13 +17,19 @@
             請先登入
           </h1>
           <div class="col-8">
+
+            <!-- 在這裡綁定事件修飾符，等於JS裡的event.preventDefault()，可使用@縮寫 -->
             <form id="form" class="form-signin" @submit.prevent="login">
               <div class="form-floating mb-3">
+
+                <!--在這裡使用v-model="user.username來雙向綁定資料-->
                 <input type="email" class="form-control" v-model="user.username" id="floatingInput"
                   placeholder="name@example.com" required autofocus>
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating">
+
+                <!--在這裡使用v-model="user.password來雙向綁定資料-->
                 <input type="password" class="form-control" v-model="user.password" id="floatingPassword" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
               </div>
@@ -44,7 +50,9 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
       integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
-      crossorigin="anonymous"></script>    
-  <script src="../js/week02_VueLogin.js" type="module"></script>    
+      crossorigin="anonymous"></script>
+      <!-- 使用type="module"匯入esm模組 -->
+  <script src="../js/week02_VueLogin.js" type="module"></script>
+  
 </body>
 </html>

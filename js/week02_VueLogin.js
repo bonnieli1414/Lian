@@ -15,21 +15,23 @@ createApp({
     },
     // 生命週期(函式)
     created() {
-        console.log(this);
+      this.login();
     },
     // 方法(物件)
     methods: {
-        login(){            
+        login(){
             const api = 'https://vue3-course-api.hexschool.io/v2/admin/signin';            
-            console.log(api);
+            // console.log(api);
             axios.post(api,this.user).then((res)=>{
-                //取出token和唯一值
+                //取出token和唯一值                
                 const {token,expired}=res.data;
                 console.log(res.data);
                 //寫入cookie token
                 //expires 設置有效時間
+                // 將token和expires存至cookie，而Cookie參數之間用『；』隔開
                 document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`;
-                window.location = 'week02_VueLogin.html';
+                // 登入後，跳轉至'week02_VueProduct.html'
+                window.location = 'week02_VueProduct.html';
             }).catch((error)=>{
                 alert(error.data.message);
             })
