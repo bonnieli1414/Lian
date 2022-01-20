@@ -75,7 +75,7 @@ createApp({
     upToProducts() {     
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/products`;
       let products = this.products;
-      axios.post(products)
+      axios.post(url,products)
         .then(() => {
           console.log(response.data);
         })
