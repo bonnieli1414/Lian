@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <!-- 1.操作 class 為 Q1 的 div 標籤，將 HTML 畫面渲染如下(需要使用 {{}} 帶入 data 中的 money, debt): -->
+        <div class="Q1">          
+          小明有 {{money}} 元，扣掉負債 {{debt}} 元，剩下 {{money-debt}} 元
+        </div>
+        <!-- 2.操作 class 為 Q2 的 div 標籤，使用 v-text 代入 data 的 rawHTML。 -->
+        <div class="Q2" v-text="rawHTML">          
+        </div>
+        <!-- 3.操作 class 為 Q3 的 div 標籤，使用 v-html 代入 data 的 rawHTML。 -->
+       <div class="Q3" v-html ="rawHTML">
+        </div>
+     </div>
+     <script src="https://unpkg.com/vue@next"></script>
+     <script src="../js/day17.js"></script>
+</body>
+</html>

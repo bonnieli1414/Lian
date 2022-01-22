@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/day18.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container p-3">
+            <!-- 請將 data 資料中的 imgUrl 綁定到 input 標籤的 value、img 標籤的 src ; 將 imgAlt 綁定到 img 標籤的 alt 上。 -->
+            <!-- 以下為縮寫型式，省略v-bind -->
+          <div class="inputWrap mb-3">
+            <input type="text" v-bind:value="imgUrl" class="imgInput mb-3">
+            <img :src="imgUrl" :alt="imgAlt">
+          </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/day18.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container p-3">
+          <h3>年紀大於 25 歲的同事</h3>
+          <ul>
+              <!-- 先使用v-for迴圈將collegueList一一取出 -->
+            <template v-for="(collegue, index) in collegueList" :key="index">
+                <!-- 再將取出的資料一一比對 -->
+              <li v-if="collegue.age > 25">
+                  <!-- 再將符合資料一一取出並以[索引位置]為屬性一一渲染-->
+                <p v-for="(value, index) in collegue" :key="value">屬性: {{index}}，值: {{value}}</p>
+              </li>
+            </template>
+          </ul>
+          <h3>年紀小於 25 歲的同事</h3>
+          <ul>
+            <template v-for="(collegue, index) in collegueList" :key="index">
+              <li v-else>
+                <p v-for="(value, index) in collegue" :key="value">屬性: {{index}}，值: {{value}}</p>
+              </li>
+            </template>
+          </ul>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/day19.js"></script>    
+</body>
+</html>
