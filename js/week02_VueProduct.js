@@ -18,7 +18,7 @@ createApp({
         })
         .catch((err) => {
           alert(err.data.message)
-          window.location = 'index.html';
+          window.location = 'week02_VueLogin.html';
         })
     },
     getData() {
