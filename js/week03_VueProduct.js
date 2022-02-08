@@ -50,20 +50,20 @@ createApp({
     updateProduct(){
       let url;
       let request;
-      if (!isNew){
+      if (!this.isNew){
         // 編輯
-        url = url + "/this.tempProduct.id";
+        url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
         request = "put";
       }else{
         // 新增
-        url = `${this.apiUrl}/api/${this.apiPath}/admin/products`;
+        url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
         request = "post"; 
       }
       // axios套件，put或post架構一樣，所以使用中括號帶入變數
       // 第2項參數是依照API文件的格式:物件包物件，要加上花括號
       axios[request](url,{ data: this.tempProduct })
       .then((res)=>{
-        alert(response.data.message);
+        alert(res.data.message);
         // 如果更新成功，則隱藏productModal
         productModal.hide();
         this.getData();
