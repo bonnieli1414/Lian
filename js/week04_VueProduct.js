@@ -1,12 +1,17 @@
 // esm匯入
 import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.9/vue.esm-browser.js';
+import pagination from '../js/week04_pagination.js';
 
 // 初始化
-let productModal;
-let delProductModal;
+let productModal = {};
+let delProductModal = {};
 
 // Vue的起手式
-createApp({
+const app = createApp({
+  // 區域註冊
+  components:{
+    pagination
+  },
   data(){
     return{
       apiUrl: 'https://vue3-course-api.hexschool.io/v2',
@@ -17,6 +22,7 @@ createApp({
         // 資料只有imagesUrl到第二層，以及html會使用到第二層的方法，所以要先定義，避免報錯is not defined
         imagesUrl: [],
       },
+      pagination:{},
     }
   },
   methods: {
@@ -25,7 +31,7 @@ createApp({
       const url = `${this.apiUrl}/api/user/check`;
       axios.post(url)
       .then(()=>{
-        this.getData();        
+        this.getProducts();        
       })
       .catch((err)=>{
         alert(err.data.message);
@@ -34,44 +40,20 @@ createApp({
       })
     },
     // 取得資料
-    getData(){
-      const url = `${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
+    getProducts(page = 1){
+      // query用法，帶入所要傳入的變數，page = 1 即是指預設值為1
+      const url = `${this.apiUrl}/api/${this.apiPath}/admin/products?page=${page}`;
       axios.get(url)
       .then((res)=>{
         // console.log(res.data);
         this.products = res.data.products;
+        // 分頁功能
+        this.pagination = res.data.pagination;
       })
       .catch((err)=>{
         alert(err.data.message);
       })
-    },
-    // 更新產品資訊
-    // 使用if判斷使用post或put
-    updateProduct(){
-      let url;
-      let request;
-      if (!this.isNew){
-        // 編輯
-        url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
-        request = "put";
-      }else{
-        // 新增
-        url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
-        request = "post"; 
-      }
-      // axios套件，put或post架構一樣，所以使用中括號帶入變數
-      // 第2項參數是依照API文件的格式:物件包物件，要加上花括號
-      axios[request](url,{ data: this.tempProduct })
-      .then((res)=>{
-        alert(res.data.message);
-        // 如果更新成功，則隱藏productModal
-        productModal.hide();
-        this.getData();
-      })
-      .catch((err)=>{
-        alert(err.data.message);
-      })   
-    },
+    },    
     // 使用if判斷isNew狀態
     // 傳參考特性，使用淺拷貝，讓外層的主畫面物件不跟著變動
     openModal(isNew,item) {
@@ -102,7 +84,7 @@ createApp({
       .then((res)=>{
         alert(res.data.message);
         delProductModal.hide();
-        this.getData();      
+        this.getProducts();      
       })
       .catch((err)=>{
         alert(err.data.message);
@@ -139,5 +121,36 @@ createApp({
     this.checkAdmin();
   },
 })
-
-.mount('#app');
+app.component('productModal',{
+  props:['tempProduct'],
+  template:'#templateForProductModal',
+  methods:{
+    // 更新產品資訊
+    // 使用if判斷使用post或put    
+    updateProduct(){
+      let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
+      // 新增
+      let request = "post";
+      if (!this.isNew){
+        // 編輯
+        url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
+        request = "put";
+      }
+      // axios套件，put或post架構一樣，所以使用中括號帶入變數
+      // 第2項參數是依照API文件的格式:物件包物件，要加上花括號
+      axios[request](url,{ data: this.tempProduct })
+      .then((res)=>{
+        alert(res.data.message);
+        // 如果更新成功，則隱藏productModal
+        this.$emit('get-product');
+        productModal.hide();
+        // 這裡是將第三週寫在外層移至內層，所以沒有getProducts()
+        // this.getProducts();
+      })
+      .catch((err)=>{
+        alert(err.data.message);
+      })   
+    },
+  }
+})
+app.mount('#app');
