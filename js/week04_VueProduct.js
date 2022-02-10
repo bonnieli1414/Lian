@@ -30,7 +30,7 @@ createApp({
       .catch((err)=>{
         alert(err.data.message);
         // 登入若失敗，則轉回Login頁面
-        window.location = 'week03_VueLogin.html';
+        window.location = 'week04_VueLogin.html';
       })
     },
     // 取得資料
