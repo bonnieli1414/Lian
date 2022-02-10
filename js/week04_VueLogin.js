@@ -26,7 +26,7 @@ createApp({
                     path=/
                     `;
                     
-                    window.location = 'week03_VueProduct.html';
+                    window.location = 'week04_VueProduct.html';
                 })
                 .catch((err)=>{
                 alert(err.data.message);
