@@ -20,11 +20,7 @@ createApp({
                 (res)=>{
                     const {token,expired}=res.data;
                     alert(res.data.message);
-                    document.cookie = `
-                    hexToken=${token};
-                    expires=${new Date(expired)};
-                    path=/
-                    `;
+                    document.cookie = `hexToken=${token};expires=${new Date(expired)};path=/`;
                     
                     window.location = 'week04_VueProduct.html';
                 })
