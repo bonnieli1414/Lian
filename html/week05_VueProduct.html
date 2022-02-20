@@ -92,7 +92,8 @@
           <div class="text-end">            
             <button class="btn btn-outline-danger" type="button"
             @click="deleteAllCarts()"
-            :disabled="cart.carts.length === 0">清空購物車</button>
+            :disabled="cartData.carts.length === 0"
+            >清空購物車</button>
           </div>
           <div>
             <!-- 先在畫面顯示購物車資訊，會顯示jason格式 -->

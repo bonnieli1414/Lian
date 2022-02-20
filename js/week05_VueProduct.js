@@ -31,7 +31,11 @@ const apiPath = "bonnieli1414";
 Vue.createApp({
   data() {
     return {
-      cartData: {},
+      cartData: {
+        // 要先設定 carts 為空陣列，否則會噴錯
+        // 亦可設定串連運算子，
+        carts:[],
+      },
       products: [],
       productId: '',
       // 局部讀取效果
@@ -45,10 +49,7 @@ Vue.createApp({
         },
         message: '',
       },
-      cart: {
-        // 要先設定 carts 為空陣列，否則會噴錯
-        // 亦可設定串連運算子，
-        carts:[],
+      cart: {        
       },
     };
   },
