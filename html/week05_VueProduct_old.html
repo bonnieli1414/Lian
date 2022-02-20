@@ -89,10 +89,8 @@
             </tbody>
           </table>
           <!-- 購物車列表 -->
-          <div class="text-end">            
-            <button class="btn btn-outline-danger" type="button"
-            @click="deleteAllCarts()"
-            :disabled="cart.carts.length === 0">清空購物車</button>
+          <div class="text-end">
+            <button class="btn btn-outline-danger" type="button">清空購物車</button>
           </div>
           <div>
             <!-- 先在畫面顯示購物車資訊，會顯示jason格式 -->
@@ -165,56 +163,45 @@
           </table>
         </div>
         <div class="my-5 row justify-content-center">
-          <!-- 搭配 @submit="createOrder 的方法 resetForm方法清空欄位 -->
-          <v-form ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
-            <!-- 綁定 套件form -->
-            <!-- rules="email|required" -->
+          <!-- <v-form ref="form" class="col-md-6" v-slot="{ errors }" >
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <v-field id="email" name="email" type="email" class="form-control"
                        :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email" 
-                       rules="email|required"
-                       v-model="form.user.email"
                       ></v-field>
               <error-message name="email" class="invalid-feedback"></error-message>
             </div>
-            <!-- 綁定 套件form -->
+
             <div class="mb-3">
               <label for="name" class="form-label">收件人姓名</label>
               <v-field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
-                       placeholder="請輸入姓名" rules="required"
-                       v-model="form.user.name"></v-field>
+                       placeholder="請輸入姓名" rules="required"></v-field>
               <error-message name="姓名" class="invalid-feedback"></error-message>
             </div>
-            <!-- 綁定 套件form -->
-            <!-- rules="required|min:8|max:10" -->
+
             <div class="mb-3">
               <label for="tel" class="form-label">收件人電話</label>
               <v-field id="tel" name="電話" type="text" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
-                       placeholder="請輸入電話"
-                       rules="required|min:8|max:10" 
-                       v-model="form.user.tel" ></v-field>
+                       placeholder="請輸入電話" ></v-field>
               <error-message name="電話" class="invalid-feedback"></error-message>
             </div>
-            <!-- 綁定 套件form -->
+
             <div class="mb-3">
               <label for="address" class="form-label">收件人地址</label>
               <v-field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
-                       placeholder="請輸入地址" rules="required" 
-                       v-model="form.user.address"></v-field>
+                       placeholder="請輸入地址" rules="required" ></v-field>
               <error-message name="地址" class="invalid-feedback"></error-message>
             </div>
-            <!-- 綁定 套件form -->
+
             <div class="mb-3">
               <label for="message" class="form-label">留言</label>
-              <textarea name="" id="message" class="form-control" cols="30" rows="10" 
-              v-model="form.message"></textarea>
+              <textarea id="message" class="form-control" cols="30" rows="10" ></textarea>
             </div>
             <div class="text-end">
               <button type="submit" class="btn btn-danger"
                       >送出訂單</button>
             </div>
-          </v-form>
+          </v-form> -->
         </div>
       </div>
     </div>
@@ -239,18 +226,12 @@
             <img class="img-fluid" :src="product.imageUrl"  alt="">
       </div>
           <div class="col-sm-6">
-            <span class="badge bg-primary rounded-pill">{{ product.category }}</span>
-            <p>商品描述：{{ product.description }}</p>
-            <p>商品內容：{{ product.content }}</p>
-            <!-- 新增v-if判斷原價是否與銷售價相同 -->
-            <div class="h5"
-            v-if="product.price===product.origin_price">{{ product.price }} 元</div>
-            <!-- 使用div包起來，並用v-else寫法 -->
-            <!-- 如果原價與優惠價不相同則顯示以下 -->
-            <div v-else>
-              <del class="h6">原價 {{ product.origin_price }} 元</del>
-              <div class="h5">現在只要 {{ product.price }} 元</div>
-            </div>  
+            <span class="badge bg-primary rounded-pill">{{  }}</span>
+            <p>商品描述：{{  }}</p>
+            <p>商品內容：{{  }}</p>
+            <div class="h5">{{  }} 元</div>
+            <del class="h6">原價 {{ }} 元</del>
+            <div class="h5">現在只要 {{  }} 元</div>
             <div>
               <div class="input-group">
                 <input type="number" class="form-control"
