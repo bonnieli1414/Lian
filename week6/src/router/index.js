@@ -1,25 +1,50 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: () => import(/* webpackChunkName: "about" */ '../views/FrontView.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        // eslint-disable-next-line no-undef
+        component: HomeView
+      },
+      // 第 2層 不需要加斜線
+      {
+        path: 'products',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ProductsViw.vue')
+      },
+      {
+        path: 'cart',
+        component: () => import(/* webpackChunkName: "about" */ '../views/CartView.vue')
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue'),
+    children: [
+      {
+        path: 'products',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AdminProducts.vue')
+      },
+      {
+        path: 'coupon',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AdminCoupon.vue')
+      }
+    ]
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  // Bootstrap 樣式，加上後，啟用連結就會變黑色，包含巢狀都會加上這個效果
+  // linkActiveClass 參考網頁 https://router.vuejs.org/zh/api/#linkactiveclass
+  linkActiveClass: 'active'
 })
 
 export default router
