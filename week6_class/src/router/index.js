@@ -17,6 +17,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/ProductsViw.vue')
       },
       { // children屬性下的path都不需加入斜線 /
+        // 與Node.js的寫法一樣
         path: 'product/:id',
         component: () => import(/* webpackChunkName: "about" */ '../views/ProductViw.vue')
       },
