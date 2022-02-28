@@ -62,6 +62,9 @@
 </template>
 
 <script>
+// 引入 emitter 外部套件
+import emitter from '@/libs/emitter'
+
 export default {
   data () {
     return {
@@ -85,13 +88,15 @@ export default {
         qty
       }
       this.isLoadingItem = id
-      this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
+      this.$http
+        .post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
         .then((res) => {
           console.log(res)
-          // 加入購物車後，再重新取得購物車資料
-          this.getCart()
-          this.$refs.productModal.closeModal()
           this.isLoadingItem = ''
+          // 加入購物車後，再重新取得購物車資料
+          // get-cart
+          // emit方法不加 $字號， $ 字號是 vue 的方法
+          emitter.emit('get-cart')
         })
     }
   },
