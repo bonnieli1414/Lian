@@ -6,32 +6,35 @@ const routes = [
     path: '/',
     component: () => import(/* webpackChunkName: "about" */ '../views/FrontView.vue'),
     children: [
-      {
-        path: '/',
+      { // children屬性下的path都不需加入斜線 /
+        path: '',
         name: 'Home',
         // eslint-disable-next-line no-undef
         component: HomeView
       },
-      // 第 2層 不需要加斜線
-      {
+      { // children屬性下的path都不需加入斜線 /
         path: 'products',
         component: () => import(/* webpackChunkName: "about" */ '../views/ProductsViw.vue')
       },
-      {
+      { // children屬性下的path都不需加入斜線 /
+        path: 'product/:id',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ProductViw.vue')
+      },
+      { // children屬性下的path都不需加入斜線 /
         path: 'cart',
         component: () => import(/* webpackChunkName: "about" */ '../views/CartView.vue')
       }
     ]
   },
-  {
+  { // children屬性下的path都不需加入斜線 /
     path: '/admin',
     component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue'),
     children: [
-      {
+      { // children屬性下的path都不需加入斜線 /
         path: 'products',
         component: () => import(/* webpackChunkName: "about" */ '../views/AdminProducts.vue')
       },
-      {
+      { // children屬性下的path都不需加入斜線 /
         path: 'coupon',
         component: () => import(/* webpackChunkName: "about" */ '../views/AdminCoupon.vue')
       }
