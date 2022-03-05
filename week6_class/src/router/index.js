@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "about" */ '../views/FrontView.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/FrontEnd/FrontView.vue'),
     children: [
       { // children屬性下的path都不需加入斜線 /
         path: '',
@@ -14,16 +14,16 @@ const routes = [
       },
       { // children屬性下的path都不需加入斜線 /
         path: 'products',
-        component: () => import(/* webpackChunkName: "about" */ '../views/ProductsViw.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/FrontEnd/ProductsViw.vue')
       },
       { // children屬性下的path都不需加入斜線 /
         // 與Node.js的寫法一樣
         path: 'product/:id',
-        component: () => import(/* webpackChunkName: "about" */ '../views/ProductViw.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/FrontEnd/ProductViw.vue')
       },
       { // children屬性下的path都不需加入斜線 /
         path: 'cart',
-        component: () => import(/* webpackChunkName: "about" */ '../views/CartView.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/FrontEnd/CartView.vue')
       }
     ]
   },
@@ -35,27 +35,27 @@ const routes = [
   { // 登入驗證頁面
     path: '/login',
     name: 'Login',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/FrontEnd/LoginView.vue')
   },
   { // children屬性下的path都不需加入斜線 /
     path: '/admin',
-    component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/BackEnd/DashboardView.vue'),
     children: [
       { // 產品頁面，children屬性下的path都不需加入斜線 /
         path: 'products',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AdminProducts.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/BackEnd/AdminProducts.vue')
       },
       { // 訂單頁面，children屬性下的path都不需加入斜線 /
         path: 'order',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AdminOrder.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/BackEnd/AdminOrder.vue')
       },
       { // 優惠券頁面，children屬性下的path都不需加入斜線 /
         path: 'coupon',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AdminCoupon.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/BackEnd/AdminCoupon.vue')
       },
       { // 貼文頁面，children屬性下的path都不需加入斜線 /
         path: 'article',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AdminArticle.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/BackEnd/AdminArticle.vue')
       }
     ]
   }
