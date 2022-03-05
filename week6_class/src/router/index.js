@@ -27,17 +27,35 @@ const routes = [
       }
     ]
   },
+  { // 重定向至登入驗證頁面
+    // 參考網頁 https://router.vuejs.org/zh/guide/essentials/redirect-and-alias.html
+    path: '/admin/:pathMatch(.*)*',
+    redirect: { name: 'Login' }
+  },
+  { // 登入驗證頁面
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/LoginView.vue')
+  },
   { // children屬性下的path都不需加入斜線 /
     path: '/admin',
     component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue'),
     children: [
-      { // children屬性下的path都不需加入斜線 /
+      { // 產品頁面，children屬性下的path都不需加入斜線 /
         path: 'products',
         component: () => import(/* webpackChunkName: "about" */ '../views/AdminProducts.vue')
       },
-      { // children屬性下的path都不需加入斜線 /
+      { // 訂單頁面，children屬性下的path都不需加入斜線 /
+        path: 'order',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AdminOrder.vue')
+      },
+      { // 優惠券頁面，children屬性下的path都不需加入斜線 /
         path: 'coupon',
         component: () => import(/* webpackChunkName: "about" */ '../views/AdminCoupon.vue')
+      },
+      { // 貼文頁面，children屬性下的path都不需加入斜線 /
+        path: 'article',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AdminArticle.vue')
       }
     ]
   }

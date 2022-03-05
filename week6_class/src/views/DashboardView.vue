@@ -15,32 +15,60 @@
                 <router-link class="nav-link" to="/admin/products">產品列表</router-link>
               </li>
               <li class="nav-item">
+                <router-link class="nav-link" to="/admin/order">訂單</router-link>
+              </li>
+              <li class="nav-item">
                 <router-link class="nav-link" to="/admin/coupon">優惠券</router-link>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li> -->
-              <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li> -->
-              <!-- <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li> -->
+              <li class="nav-item">
+                <router-link class="nav-link" to="/admin/article">貼文</router-link>
+              </li>
+              <div>
+                <a href="#" @click.prevent="signout">登出</a>
+              </div>
             </ul>
-            <!-- <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
           </div>
+          <!-- 透過 checkSuccess 狀態控制 router-vie 要不要呈現，不需要每個頁面都寫 check-->
+          <!-- 如果 true 就呈現產品列表和優惠券在畫面上，沒有就不渲染畫面 -->
+          <router-view v-if="checkSuccess"></router-view>
         </div>
     </nav>
-    <router-view></router-view>
 </template>
+
+<script>
+export default {
+  name: 'DashboardView',
+  data () {
+    return {
+      // checkSuccess 預設為 false
+      checkSuccess: false
+    }
+  },
+  mounted () {
+    this.checkLogin()
+  },
+  methods: {
+    checkLogin () {
+      // 取出token
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      if (token) {
+        this.$http.defaults.headers.common.Authorization = `${token}`
+        const api = `${process.env.VUE_APP_API}api/user/check`
+        this.$http
+          .post(api, { api_token: this.token })
+          .then(() => {
+            this.checkSuccess = true
+          })
+          .catch((err) => {
+            console.log(err.response.data.message)
+            alert(err.data.message)
+            this.$router.push('/login')
+          })
+      } else {
+        alert('您尚未登入')
+        this.$router.push('/login')
+      }
+    }
+  }
+}
+</script>
