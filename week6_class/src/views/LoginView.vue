@@ -1,40 +1,32 @@
 <template>
-    <div class="container mt-5">
-    <Loading :active="isLoading" :z-index="1060"></Loading>
-    <form class="row justify-content-center" @submit.prevent="signIn">
-      <div class="col-md-6">
-        <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
-        <div class="mb-2">
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input
-            type="email"
-            id="inputEmail"
-            class="form-control"
-            placeholder="Email address"
-            v-model="user.username"
-            required
-            autofocus
-          />
-        </div>
-        <div class="mb-2">
-          <!-- 登入頁面填寫 -->
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input
-            type="password"
-            id="inputPassword"
-            class="form-control"
-            v-model="user.password"
-            placeholder="Password"
-            required
-          />
-        </div>
-        <div class="text-end mt-4">
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            登入
-          </button>
-        </div>
+  <!-- 取自bootstrap網格 https://bootstrap5.hexschool.com/docs/5.0/layout/grid/ -->
+  <div class="container mt-5">
+  <h2>請先登入</h2>
+  <div class="row">
+    <div class="col">
+      <!-- 取自取自bootstrap表單 https://bootstrap5.hexschool.com/docs/5.0/forms/overview/ -->
+    <form class="form-signin" @submit.prevent="login">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <!-- 使用v-model綁定 -->
+        <!-- placeholder屬性是 提交表單之前必須填寫輸入字段。 -->
+        <!-- required屬性是 必需在提交表單之前填寫輸入字段-->
+        <input type="email" class="form-control" id="exampleInputEmail1"
+        v-model="user.username"
+        placeholder="name@example.com"
+        required>
       </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1"
+        v-model="user.password"
+        placeholder="Password"
+        required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">登入</button>
     </form>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -42,21 +34,20 @@
 export default {
   data () {
     return {
-      user: {}
+      user: {
+        username: '',
+        password: ''
+      }
     }
   },
   methods: {
-    sigIn () {
-      const api = `${process.env.VUE_APP_API}admin/signin`
+    login () {
+      const url = `${process.env.VUE_APP_API}admin/signin`
       this.$http
-        .post(api, this.user)
+        .post(url, this.user)
         .then((res) => {
-        // 寫入cookie token
-        // expires 設置有效時間
-        // 將token和expires存至cookie，而Cookie參數之間用『；』隔開
           const { token, expired } = res.data
           document.cookie = `hexToken=${token};expires=${new Date(expired)}`
-          // 登入後，跳轉至'/admin/products'
           this.$router.push('/admin/products')
         })
         .catch((err) => {
