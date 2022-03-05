@@ -1,10 +1,12 @@
 <template>
   <!-- 取自bootstrap網格 https://bootstrap5.hexschool.com/docs/5.0/layout/grid/ -->
   <div class="container mt-5">
-  <h2>請先登入</h2>
-  <div class="row">
-    <div class="col">
+  <!-- 置中 -->
+  <div class="row justify-content-center">
+    <!-- 限定寬度 -->
+    <div class="col-md-6">
       <!-- 取自取自bootstrap表單 https://bootstrap5.hexschool.com/docs/5.0/forms/overview/ -->
+    <h2>請先登入</h2>
     <form class="form-signin" @submit.prevent="login">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
