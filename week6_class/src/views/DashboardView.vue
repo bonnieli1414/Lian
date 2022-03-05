@@ -1,4 +1,5 @@
 <template>
+    <!-- 取自 https://bootstrap5.hexschool.com/docs/5.1/components/navbar/ -->
     <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark">
         <div class="container-fluid">
           <!-- 建議在router環境下都不要出現a連結比較不容易出錯 -->
