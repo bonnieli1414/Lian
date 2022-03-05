@@ -24,9 +24,9 @@
               <li class="nav-item">
                 <router-link class="nav-link" to="/admin/article">貼文</router-link>
               </li>
-              <div>
-                <a href="#" @click.prevent="signout">登出</a>
-              </div>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/" @click="singout">登出</router-link>
+              </li>
             </ul>
           </div>
           <!-- 透過 checkSuccess 狀態控制 router-vie 要不要呈現，不需要每個頁面都寫 check-->
