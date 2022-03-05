@@ -53,7 +53,7 @@ export default {
         })
         .catch((err) => {
           console.log(err.response.data.message)
-          alert(err.response.data.message)
+          alert(err.response.data.message + '\n' + err.response.data.error.message)
         })
     }
   }
