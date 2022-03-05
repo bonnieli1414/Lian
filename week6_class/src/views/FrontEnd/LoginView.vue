@@ -42,16 +42,18 @@ export default {
   },
   methods: {
     login () {
-      const url = `${process.env.VUE_APP_API}admin/signin`
+      // 登入請求
+      const api = `${process.env.VUE_APP_API}admin/signin`
       this.$http
-        .post(url, this.user)
+        .post(api, this.user)
         .then((res) => {
           const { token, expired } = res.data
           document.cookie = `hexToken=${token};expires=${new Date(expired)}`
           this.$router.push('/admin/products')
         })
         .catch((err) => {
-          alert(err.res.data.message)
+          console.log(err.response.data.message)
+          alert(err.response.data.message)
         })
     }
   }
