@@ -1,8 +1,8 @@
 <template>
-    <h2>產品列表</h2>
     <!-- {{ products }} -->
     <!-- bootstrap起手式，在排版時通常會定義1個容器，叫做container -->
     <div class="container">
+      <h2>產品列表</h2>
       <!-- 格線系統起手式 外層會使用row-->
       <!-- row決定內層數量 -->
       <!-- row-cols-1行動版顯示1欄，row-cols-lg-4電腦版顯示4欄 -->
